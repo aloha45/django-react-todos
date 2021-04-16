@@ -26,8 +26,8 @@ export default class Form extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
-    console.log("saved")
-    alert("saved" + JSON.stringify(this.state.activeItem))
+    // alert("saved" + JSON.stringify(this.state.activeItem))
+    this.props.addItem(this.state.activeItem)
   }
 
 	render() {
@@ -35,7 +35,7 @@ export default class Form extends Component {
 			<>
 				<h2>Todo Item</h2>
 				<form>
-					<label for="todo-title">Title</label>
+					<label for="todo-title">Title: </label>
 					<input
 						type="text"
 						id="todo-title"
@@ -44,7 +44,7 @@ export default class Form extends Component {
 						onChange={this.handleChange}
 						placeholder="Enter Todo Title"
 					/>
-					<label for="todo-description">Description</label>
+					<label for="todo-description">Description: </label>
 					<input
 						type="text"
 						id="todo-description"
@@ -53,7 +53,7 @@ export default class Form extends Component {
 						onChange={this.handleChange}
 						placeholder="Enter Todo description"
 					/>
-					<label for="completed">Completed?</label>
+					<label for="completed">Completed? </label>
 					<input
 						type="checkbox"
 						name="completed"

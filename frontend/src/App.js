@@ -5,7 +5,7 @@ class App extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-      test: "test works",
+			test: "test works",
 			todoList: [
 				{
 					id: 1,
@@ -36,6 +36,10 @@ class App extends Component {
 		};
 	}
 
+  addItem = (newItem) => {
+    this.setState({todoList: [...this.state.todoList, newItem]})
+  }
+
 	render() {
 		return (
 			<>
@@ -43,11 +47,11 @@ class App extends Component {
 					<h1>Todo app</h1>
 					<button className="btn btn-primary">Add task</button>
 					<ul className="todos">
-						{this.state.todoList.map((todo) => 
-							<li>{todo.title}</li>
-						)}
+						{this.state.todoList.map((todo, idx) => (
+							<li key={idx}>{todo.title}</li>
+						))}
 					</ul>
-          <Form />
+					<Form addItem={this.addItem} />
 				</main>
 			</>
 		);
