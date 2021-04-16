@@ -1,28 +1,40 @@
 import React, { Component } from "react";
-import Form from './components/form'
-import axios from 'axios'
+import Form from "./components/form";
+import axios from "axios";
 import "./App.css";
 class App extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			test: "test works",
-			todoList: []
+			todoList: [],
 		};
 	}
 
-  componentDidMount() {
-    this.getTodos()
-  }
+	componentDidMount() {
+		this.getTodos();
+	}
 
-  getTodos() {
-    axios.get('/api/todos')
-    .then(res => this.setState({ todoList: res.data}))
-  }
+	getTodos() {
+		axios
+			.get("/api/todos")
+			.then((res) => this.setState({ todoList: res.data }));
+	}
 
-  addItem = (newItem) => {
-    this.setState({todoList: [...this.state.todoList, newItem]})
-  }
+  // look into data store patterns (data access)
+
+	handleDelete = (todo) => {
+		axios.delete(`/api/todos/${todo.id}`).then((res) => this.getTodos());
+	};
+
+	addItem = (newItem) => {
+		axios.post("/api/todos/", newItem).then((res) => this.getTodos());
+		// this.setState({todoList: [...this.state.todoList, newItem]})
+	};
+
+	deleteItem = (item) => {
+		axios.delete(`/api/todos/${item.id}/`).then((res) => this.getTodos());
+	};
 
 	render() {
 		return (
@@ -32,7 +44,12 @@ class App extends Component {
 					<button className="btn btn-primary">Add task</button>
 					<ul className="todos">
 						{this.state.todoList.map((todo, idx) => (
-							<li key={idx}>{todo.title}</li>
+							<>
+								<li key={idx}>{todo.title}</li>
+								<button key={idx} onClick={() => this.deleteItem(todo)}>
+									X
+								</button>
+							</>
 						))}
 					</ul>
 					<Form addItem={this.addItem} />
