@@ -35,7 +35,7 @@ export default class Form extends Component {
 			<>
 				<h2>Todo Item</h2>
 				<form>
-					<label for="todo-title">Title: </label>
+					<label htmlFor="todo-title">Title: </label>
 					<input
 						type="text"
 						id="todo-title"
@@ -44,7 +44,7 @@ export default class Form extends Component {
 						onChange={this.handleChange}
 						placeholder="Enter Todo Title"
 					/>
-					<label for="todo-description">Description: </label>
+					<label htmlFor="todo-description">Description: </label>
 					<input
 						type="text"
 						id="todo-description"
@@ -53,7 +53,7 @@ export default class Form extends Component {
 						onChange={this.handleChange}
 						placeholder="Enter Todo description"
 					/>
-					<label for="completed">Completed? </label>
+					<label htmlFor="completed">Completed? </label>
 					<input
 						type="checkbox"
 						name="completed"

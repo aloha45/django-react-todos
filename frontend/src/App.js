@@ -1,40 +1,24 @@
 import React, { Component } from "react";
 import Form from './components/form'
+import axios from 'axios'
 import "./App.css";
 class App extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			test: "test works",
-			todoList: [
-				{
-					id: 1,
-					title: "Go to Market",
-					description: "Buy ingredients to prepare dinner",
-					completed: true,
-				},
-				{
-					id: 2,
-					title: "Study",
-					description:
-						"Read Algebra and History textbook for the upcoming test",
-					completed: false,
-				},
-				{
-					id: 3,
-					title: "Sammy's books",
-					description: "Go to library to return Sammy's books",
-					completed: true,
-				},
-				{
-					id: 4,
-					title: "Article",
-					description: "Write article on how to use Django with React",
-					completed: false,
-				},
-			],
+			todoList: []
 		};
 	}
+
+  componentDidMount() {
+    this.getTodos()
+  }
+
+  getTodos() {
+    axios.get('/api/todos')
+    .then(res => this.setState({ todoList: res.data}))
+  }
 
   addItem = (newItem) => {
     this.setState({todoList: [...this.state.todoList, newItem]})
